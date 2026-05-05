@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>App de Corazones</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000080; /* azul de fondo */
+      font-family: Arial, sans-serif;
+    }
+    #ventana {
+      width: 800px;
+      height: 600px; /* ventana más grande */
+      background: pink;
+      border: 3px solid black;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 10px;
+    }
+    #acceso {
+      margin-top: 250px;
+      padding: 10px 20px;
+      font-size: 22px;
+      cursor: pointer;
+    }
+    #verso {
+      display: none;
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ff69b4;
+      line-height: 1.4;
+      text-align: left;
+      overflow-y: auto;
+      height: 90%;
+    }
+    .corazon, .love, .palabra, .balon {
+      position: absolute;
+      animation: caer 8s linear forwards;
+    }
+    @keyframes caer {
+      0% { transform: translateY(-30px); opacity: 1; }
+      100% { transform: translateY(620px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="ventana">
+    <button id="acceso">Presiona aquí precioso</button>
+    <div id="verso">
+      Eres melodía en el alba de cada mañana,<br>
+      no imagino una vida sin llamarte protagonista.<br>
+      No robo sonrisas ajenas, ni me permito mostrarme ante<br>
+      Otra vos vulnerable, porque en ti encontré refugio.<br><br>
+
+      No suelo decirlo, pero me he enamorado.<br>
+      Es loco, porque el amor toma su tiempo,<br>
+      y no sé si nació en el primer instante,<br>
+      fue algo inexplicable, sin razón ni medida,<br>
+      pero con todas las ganas.<br><br>
+
+      Tú haces que mis días sean más hermosos,<br>
+      mis despertares más tranquilos,<br>
+      llenas mis noches de calma,<br>
+      iluminas mi vida y describes mi alma.<br><br>
+
+      No suelo amar, pero contigo deseo<br>
+      una historia sin final, solo con punto de partida.<br>
+      No me veo enamorándome de otra persona,<br>
+      porque me declaro loca por ti,<br>
+      fan de tus sonrisas y amante de tus ojos.
+    </div>
+  </div>
+
+  <script>
+    const boton = document.getElementById("acceso");
+    const verso = document.getElementById("verso");
+    const ventana = document.getElementById("ventana");
+
+    boton.addEventListener("click", () => {
+      boton.style.display = "none";
+      verso.style.display = "block";
+      iniciarLluviaCorazones();
+      iniciarLluviaLove();
+      iniciarLluviaPalabras();
+      iniciarLluviaBalones();
+    });
+
+    function iniciarLluviaCorazones() {
+      const colores = ["white", "black", "blue", "purple", "red"];
+      setInterval(() => {
+        const corazon = document.createElement("div");
+        corazon.classList.add("corazon");
+        corazon.textContent = "❤";
+        corazon.style.left = Math.random() * 780 + "px";
+        corazon.style.color = colores[Math.floor(Math.random() * colores.length)];
+        corazon.style.fontSize = (20 + Math.random() * 25) + "px";
+        ventana.appendChild(corazon);
+
+        setTimeout(() => {
+          corazon.remove();
+        }, 8000);
+      }, 300);
+    }
+
+    function iniciarLluviaLove() {
+      const colores = ["red", "pink", "white", "purple", "black"];
+      setInterval(() => {
+        const love = document.createElement("div");
+        love.classList.add("love");
+        love.textContent = "LOVE";
+        love.style.left = Math.random() * 780 + "px";
+        love.style.color = colores[Math.floor(Math.random() * colores.length)];
+        love.style.fontSize = (16 + Math.random() * 20) + "px";
+        ventana.appendChild(love);
+
+        setTimeout(() => {
+          love.remove();
+        }, 8000);
+      }, 800);
+    }
+
+    function iniciarLluviaPalabras() {
+      const palabras = ["Jona", "bebé", "love", "amor", "mi vida", "corazón", "oso", "baby", "cariño", "solecito", "cielo", "ojitos"];
+      const colores = ["red", "pink", "white", "purple", "black", "blue"];
+      setInterval(() => {
+        const palabra = document.createElement("div");
+        palabra.classList.add("palabra");
+        palabra.textContent = palabras[Math.floor(Math.random() * palabras.length)];
+        palabra.style.left = Math.random() * 780 + "px";
+        palabra.style.color = colores[Math.floor(Math.random() * colores.length)];
+        palabra.style.fontSize = (14 + Math.random() * 18) + "px";
+        ventana.appendChild(palabra);
+
+        setTimeout(() => {
+          palabra.remove();
+        }, 8000);
+      }, 1000);
+    }
+
+    function iniciarLluviaBalones() {
+      const colores = ["black", "white"];
+      setInterval(() => {
+        const balon = document.createElement("div");
+        balon.classList.add("balon");
+        balon.textContent = "⚽";
+        balon.style.left = Math.random() * 780 + "px";
+        balon.style.color = colores[Math.floor(Math.random() * colores.length)];
+        balon.style.fontSize = (20 + Math.random() * 25) + "px";
+        ventana.appendChild(balon);
+
+        setTimeout(() => {
+          balon.remove();
+        }, 8000);
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

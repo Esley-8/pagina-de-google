@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Rosas Azules</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawBlueRose(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(scale, scale);
+            ctx.strokeStyle = '#0000ff';
+            ctx.fillStyle = '#87cefa'; // light blue fill
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                ctx.rotate(Math.PI / 3);
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(20, -20, 40, -20, 50, 0);
+                ctx.bezierCurveTo(40, 20, 20, 20, 0, 0);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        // animar rosas en espiral infinita
+        let angle = 0;
+        let radius = 0;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        function animate() {
+            // aumentar ángulo y radio para espiral
+            angle += 0.1;
+            radius += 0.5;
+            const x = centerX + Math.cos(angle) * radius;
+            const y = centerY + Math.sin(angle) * radius;
+            const scale = 1 + radius / 100;
+
+            // dibujar rosa en posición calculada
+            drawBlueRose(ctx, x, y, scale);
+
+            // mantener dentro del canvas borrando al sobrepasar
+            if (radius < Math.max(canvas.width, canvas.height)) {
+                requestAnimationFrame(animate);
+            } else {
+                // reiniciar para efecto infinito
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                angle = 0;
+                radius = 0;
+                requestAnimationFrame(animate);
+            }
+        }
+
+        animate();
+    </script>
+</body>
+</html>
